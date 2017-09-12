@@ -17,6 +17,7 @@ def clean():
         'skip_bad_hosts': True,
         'timeout': 1800,
         'hosts': HOSTS,
+        'warn_only': True,
         'user': 'dcos'
     }
     with settings(**context_dict):
