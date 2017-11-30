@@ -14,12 +14,18 @@ def removeNode(ZK, path):
 
 
 if __name__ == '__main__':
-    zkNode = sys.argv[1]
+    zkNode = None
+    if len(sys.argv) > 1:
+        zkNode = sys.argv[1]
     if len(sys.argv) > 2:
         zkHost = sys.argv[2]
         ZK = KazooClient(hosts=[zkHost])
     else:
-        ZK = KazooClient(hosts=['192.168.105.247:2181'])
+        ZK = KazooClient(hosts=['master.mesos:2181'])
     ZK.start()
-    removeNode(ZK, zkNode)
-
+    if not zkNode:
+        kafkaZnodes = ['/isr_change_notification', '/admin', '/consumers', '/brokers', '/controller_epoch', '/config', '/cluster']
+        for znode in kafkaZnodes:
+            removeNode(ZK, znode)
+    else:
+        removeNode(ZK, zkNode)
