@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, getopt
 from kazoo.client import KazooClient
 
 
@@ -14,18 +14,21 @@ def removeNode(ZK, path):
 
 
 if __name__ == '__main__':
-    zkNode = None
-    if len(sys.argv) > 1:
-        zkNode = sys.argv[1]
-    if len(sys.argv) > 2:
-        zkHost = sys.argv[2]
-        ZK = KazooClient(hosts=[zkHost])
-    else:
-        ZK = KazooClient(hosts=['master.mesos:2181'])
+    zkNodes = None
+    zkHost = 'master.mesos:2181'
+
+    opts,args = getopt.getopt(sys.argv[1:], "h:n:", ["hosts=", "nodes="]);
+    for opt,arg in opts:  
+        if opt in ("-h", "--hosts"):
+            zkHost = arg
+            print "zkHost: ", zkHost
+        elif opt in ('-n', '--nodes'):
+            zkNodes = arg.split(',')
+            print 'zkNodes: ', zkNodes
+    ZK = KazooClient(hosts=[zkHost])
     ZK.start()
-    if not zkNode:
+    if not zkNodes:
         kafkaZnodes = ['/isr_change_notification', '/admin', '/consumers', '/brokers', '/controller_epoch', '/config', '/cluster']
-        for znode in kafkaZnodes:
-            removeNode(ZK, znode)
-    else:
-        removeNode(ZK, zkNode)
+        zkNodes = kafkaZnodes
+    for znode in zkNodes:
+        removeNode(ZK, znode)
