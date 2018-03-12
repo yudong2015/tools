@@ -3,14 +3,15 @@ from kazoo.client import KazooClient
 
 
 def removeNode(ZK, path):
-    children = ZK.get_children(path)
-    if children:
-        for child in children:
-            removeNode(ZK, os.path.join(path, child))
-        removeNode(ZK, path)
-    else:
-        print 'Remove node: {}'.format(path)
-        ZK.delete(path)
+    if ZK.exists(path):
+        children = ZK.get_children(path)
+        if children:
+            for child in children:
+                removeNode(ZK, os.path.join(path, child))
+            removeNode(ZK, path)
+        else:
+            print 'Remove node: {}'.format(path)
+            ZK.delete(path)
 
 
 if __name__ == '__main__':
