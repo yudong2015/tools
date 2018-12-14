@@ -1,5 +1,36 @@
+"###################### set vundle#############################
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'Scrooloose/nerdtree'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"#######################################################################################
 
 " 显示行号
 set number
@@ -77,13 +108,13 @@ set noeb
 " 自动保存
 set autowrite
 " 突出显示当前行 
-set cursorline
+"set cursorline
 " 突出显示当前列
-set cursorcolumn
+"set cursorcolumn
 "设置光标样式为竖线vertical bar
 " Change cursor shape between insert and normal mode in iTerm2.app
 "if $TERM_PROGRAM =~ "iTerm"
-let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert
+let &t_SI = "\<Esc>]50;CursorShape=0\x7" " Vertical bar in insert
 mode
 let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 "endif
@@ -98,7 +129,7 @@ set scrolloff=3
 "NERDTree config
 " 使用F1做NERDTree的快捷键
 "nnoremap <F1>:NERDTreeToggle<CR>
-nnoremap <silent> <F2> :NERDTree<CR>
+nnoremap <silent> <F1> :NERDTree<CR>
 
 " 关闭vim时，只有NERTTree打开时，自动关闭,减少多次按:q!.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
