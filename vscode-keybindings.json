@@ -70,10 +70,6 @@
         "command": "workbench.action.nextEditor"
     },
     {
-        "key": "ctrl+/",
-        "command": "workbench.action.showErrorsWarnings"
-    },
-    {
         "key": "ctrl+h",
         "command": "cursorLeft",
         "when": "textInputFocus"
@@ -94,16 +90,15 @@
         "when": "textInputFocus"
     },
     {
-        "key": "ctrl+j",
+        "key": "j",
         "command": "list.focusDown",
         "when": "listFocus && !inputFocus"
     },
     {
-        "key": "ctrl+k",
+        "key": "k",
         "command": "list.focusUp",
         "when": "listFocus && !inputFocus"
     },
-    
     {
         "key": "ctrl+e",
         "command": "workbench.view.explorer"
@@ -119,8 +114,47 @@
         "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "alt+space",
+        "key": "shift+backspace",
+        "command": "deleteAllLeft",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+delete",
+        "command": "deleteAllRight",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+/",
         "command": "toggleSuggestionDetails",
         "when": "suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "ctrl+space",
+        "command": "-toggleSuggestionDetails",
+        "when": "suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "ctrl+/",
+        "command": "workbench.action.openTipsAndTricksUrl"
+    },
+    {
+        "key": "cmd+enter",
+        "command": "renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "enter",
+        "command": "-renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "cmd+enter",
+        "command": "acceptRenameInput",
+        "when": "editorFocus && renameInputVisible"
+    },
+    {
+        "key": "enter",
+        "command": "-acceptRenameInput",
+        "when": "editorFocus && renameInputVisible"
     }
 ]
