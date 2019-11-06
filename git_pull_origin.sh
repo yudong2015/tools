@@ -14,4 +14,4 @@ git checkout ${CURRENT_BRANCH}
 
 
 
-# Usage: git-pull-origin.sh $BRANCH
+# Usage: git_pull_origin.sh $BRANCH
