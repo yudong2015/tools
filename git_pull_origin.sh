@@ -5,7 +5,9 @@ set -e
 REGITRY="origin"
 
 TARGET_BANCH=$1
-CURRENT_BRANCH=`git name-rev --name-only HEAD`
+CURRENT_BRANCH=`git branch | grep \* | cut -d ' ' -f2`
+
+echo ${CURRENT_BRANCH}
 
 git checkout ${TARGET_BANCH}
 git pull ${REGITRY} ${TARGET_BANCH}

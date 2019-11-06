@@ -5,7 +5,7 @@ set -e
 REGITRY="my"
 
 TARGET_BANCH=$1
-CURRENT_BRANCH=`git name-rev --name-only HEAD`
+CURRENT_BRANCH=`git branch | grep \* | cut -d ' ' -f2`
 
 if [[ ${TARGET_BANCH} == "" ]]; then
     git push -u ${REGITRY} ${CURRENT_BRANCH}
