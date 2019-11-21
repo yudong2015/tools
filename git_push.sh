@@ -3,19 +3,28 @@
 set -e
 
 REGISTRY=$1
-TARGET_BANCH=$2
+TARGET_BRANCH=$2
+
+FILE_DIR=$(cd `dirname $0`; pwd)
+${FILE_DIR}/git_status_check.sh
+
 CURRENT_BRANCH=`git branch | grep \* | cut -d ' ' -f2`
 
-if [[ ${TARGET_BANCH} == "" ]]; then
+if [[ ${TARGET_BRANCH} == "" ]]; then
     echo "git push -u ${REGISTRY} ${CURRENT_BRANCH}"
     git push -u ${REGISTRY} ${CURRENT_BRANCH}
 else
-    echo "git checkout ${TARGET_BANCH}"
-    git checkout ${TARGET_BANCH}
-    echo "git push -u ${REGISTRY} ${TARGET_BANCH}"
-    git push -u ${REGISTRY} ${TARGET_BANCH}
-    echo "git checkout ${CURRENT_BRANCH}"
-    git checkout ${CURRENT_BRANCH}
+    if [[ ${TARGET_BRANCH} == ${CURRENT_BRANCH} ]]; then
+        echo "git push -u ${REGISTRY} ${TARGET_BRANCH}"
+        git push -u ${REGISTRY} ${TARGET_BRANCH}
+    else
+        echo "git checkout ${TARGET_BRANCH}"
+        git checkout ${TARGET_BRANCH}
+        echo "git push -u ${REGISTRY} ${TARGET_BRANCH}"
+        git push -u ${REGISTRY} ${TARGET_BRANCH}
+        echo "git checkout ${CURRENT_BRANCH}"
+        git checkout ${CURRENT_BRANCH}
+    fi
 fi    
 
 
